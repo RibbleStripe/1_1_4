@@ -13,7 +13,6 @@ public class Util {
             String USERNAME = "root";
             String PASSWORD = "root";
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
