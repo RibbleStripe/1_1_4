@@ -23,13 +23,18 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(false);
             connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
-        }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -39,13 +44,18 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(false);
             connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
-        }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -59,13 +69,18 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
             System.out.println("User с именем – " + name + "добавлен в базу данных");
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
-        }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -76,14 +91,20 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(false);
             connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public List<User> getAllUsers() {
@@ -98,16 +119,22 @@ public class UserDaoJDBCImpl implements UserDao {
                 User user = new User(name, lastName, age);
                 user.setId(id);
                 users.add(user);
-            }   connection.setAutoCommit(false);
-                connection.commit();
+            }
+            connection.setAutoCommit(false);
+            connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
-        }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return users;
     }
@@ -118,13 +145,18 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(false);
             connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
-        }
-        try {
-            connection.rollback();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
