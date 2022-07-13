@@ -13,8 +13,6 @@ public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
 
     }
-
-
     @Override
     public void createUsersTable() {
         Session session = getSessionFactory().openSession();
@@ -65,7 +63,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-
+        try(Session session = getSessionFactory().openSession()) {
+            session.createQuery("delete User where id = :id").setParameter("id", id);
+        }
     }
 
     @Override
